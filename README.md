@@ -27,7 +27,7 @@ How to recv RPC
 SprotoTypeBase HeartbeatRsp(SprotoTypeBase _)
 {
     SprotoType.Heartbeat.request req = _ as SprotoType.Heartbeat.request;
-    return null;
+    return null; // can return a response
 }
 
 NetReceiver.AddHandler<Protocol.Heartbeat>(HeartbeatRsp);
