@@ -87,11 +87,11 @@ public class NetCore
 
     public static void Send<T>(SprotoTypeBase rpc = null, long? session = null)
     {
-        Send(protocol[typeof(T)], rpc, session);
+        Send(rpc, session, protocol[typeof(T)]);
     }
 
     private static int MAX_PACK_LEN = (1 << 16) - 1;
-    private static void Send(int tag, SprotoTypeBase rpc = null, long? session = null)
+    private static void Send(SprotoTypeBase rpc, long? session, int tag)
     {
         if (!connected || !enabled)
         {
@@ -218,7 +218,7 @@ public class NetCore
                     SprotoTypeBase rpcRsp = rpcReqHandler(protocol.GenRequest(tag, data, offset));
                     if (pkg.HasSession)
                     {
-                        Send(tag, rpcRsp, session);
+                        Send(rpcRsp, session, tag);
                     }
                 }
             }
